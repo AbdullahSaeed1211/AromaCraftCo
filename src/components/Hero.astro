@@ -1,0 +1,32 @@
+---
+//utils
+import { getImage } from "astro:assets";
+
+// components
+import Link from "./Link.astro";
+import Heading from "./heading.astro";
+
+// assets
+import heroBackground from "../assets/images/cover.png";
+const optimizedBackground = await getImage({
+  src: heroBackground,
+  format: "avif",
+  transforms: {
+    resize: {
+      width: 1920,
+      height: 1080,
+      fit: "cover",
+      position: "center",
+    },
+  },
+});
+---
+
+<header
+  class="grid place-items-center gap-6 sm:gap-8 min-h-[80vh] place-content-center container bg-cover bg-no-repeat bg-center"
+  style={`background-image:url(${optimizedBackground.src})`}>
+  <Heading size="h2" tagType="h1" classes="max-w-sm text-center">
+    Seriously Fun Coffee
+  </Heading>
+  <Link href="#" style="square" classes="">Shop Now</Link>
+</header>
