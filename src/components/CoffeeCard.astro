@@ -10,13 +10,12 @@ import { convertNumberToUSD } from "../utils";
 
 import type { CollectionEntry } from "astro:content";
 import Link from "./Link.astro";
-
 type Props = {
   coffee: CollectionEntry<"coffees">;
 };
 
 const { coffee } = Astro.props;
-const { title, price, image_src, image_alt } = coffee.data;
+const { title, price, img_src, image_alt } = coffee.data;
 ---
 
 <article class="grid sm:grid-cols-2 place-items-center sm:justify-between">
@@ -34,6 +33,6 @@ const { title, price, image_src, image_alt } = coffee.data;
     <Link href={coffee.slug} style="rounded">Buy Now</Link>
   </div>
   <Link href={coffee.slug} style="ghost">
-    <Image src={image_src} height={540} width={550} alt={image_alt} />
+    <Image src={img_src} height={540} width={550} alt={image_alt}  />
   </Link>
 </article>
