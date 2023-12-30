@@ -7,7 +7,8 @@ import Link from "./Link.astro";
 import Heading from "./heading.astro";
 
 // assets
-import heroBackground from "../assets/images/cover.png";
+// import heroBackground from "../assets/images/cover.png";
+import heroBackground from "../assets/images/hero.jpg";
 const optimizedBackground = await getImage({
   src: heroBackground,
   format: "avif",
@@ -25,8 +26,8 @@ const optimizedBackground = await getImage({
 <header
   class="grid place-items-center gap-6 sm:gap-8 min-h-[80vh] place-content-center container bg-cover bg-no-repeat bg-center"
   style={`background-image:url(${optimizedBackground.src})`}>
-  <Heading size="h2" tagType="h1" classes="max-w-sm text-center">
-    Seriously Fun Coffee
+  <Heading size="h2" tagType="h1" classes="max-w-sm text-center text-white ">
+    Seriously Fun <span class="text-pine-accent"> <br>Coffee</span>
   </Heading>
-  <Link href="#" style="square" classes="">Shop Now</Link>
+  <Link href="#" style="square" classes="bg-white">Shop Now</Link>
 </header>

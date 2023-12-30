@@ -1,7 +1,7 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
- const navItems = [
+const navItems = [
   {
     title: "Locations",
     href: "locations",
@@ -19,8 +19,8 @@ import { Icon } from 'astro-icon/components';
     href: "wholesale",
   },
   {
-    title: "Coffee Quiz",
-    href: "coffee-quiz",
+    title: "Contact",
+    href: "contact",
   },
 ];
 
@@ -42,49 +42,58 @@ const navIcons = [
   },
 ];
 
-
-import logo from "../assets/images/heading.png";
-import { Image } from 'astro:assets'
+import logo from "../assets/images/logo2.svg";
+import { Image } from "astro:assets";
 import Link from "./Link.astro";
 ---
+
 <p
   class="bg-pine-accent font-sans text-sm font-normal text-center px-4 py-1 tracking-wide"
-  id="banner"
->
-  Pinedale: Mon-Sat 7:30-4:30 Sun 8-2 <span class="sm:px-8">—</span> Boise: Mon-Sat
-  8-4
+  id="banner">
+  Pinedale: Mon-Sat 7:30-4:30 Sun 8-2 <span class="sm:px-8">—</span> Boise:
+  Mon-Sat 8-4
 </p>
-<nav class="grid gap-2 pt-2 px-6 sticky top-0 bg-white">
-  <div class="flex justify-between items-start gap-2 ">
-    <Icon name="ic:baseline-menu" width={40} height={50}/>
+
+<nav
+  class="flex justify-between sm:justify-evenly items-center bg-white sticky top-0 shadow sm:shadow-none px-6 h-20">
+  <Link style="ghost" href="/">
+    <Icon name="ic:baseline-menu" width={30} height={40} class="sm:hidden justify-start" />
     <Image
       src={logo}
-      alt="logomark for Pine"
+      alt="logomark"
       format="avif"
-      width={250}
-      class="relative left-8 transition-transform duration-700 self-start"
-      id="logomark"
+      width={75}
+      class="transition-transform duration-700 hidden sm:block"
     />
-    <div class="flex justify-end items-center gap-1 py-2">
+  </Link>
+
+  <div class="flex w-">
+    <div
+      class="hidden sm:flex justify-between items-center gap-3 w-full text-sm md:text-lg">
       {
-        // Render navIcons only for smaller viewports
-        navIcons.map((i) => (
-          <Link style="ghost" href={i.href} aria-label={i.label}>
-            <Icon name={i.icon} width={30} height={40} />
+        navItems.map((i) => (
+          <Link href={i.href} style="link">
+            {i.title}
           </Link>
         ))
       }
     </div>
+    <div class="md:hidden flex justify-center items-center w-full">
+      <Image
+        src={logo}
+        alt="logomark"
+        format="avif"
+        width={75}
+        class="transition-transform duration-700"
+      />
+    </div>
   </div>
-  <div
-    class="hidden sm:flex items-center justify-center gap-6 transition-opacity"
-    id="nav-links"
-  >
+
+  <div class="flex justify-end items-center gap-1 pr">
     {
-      // Render navItems only for larger viewports
-      navItems.map((i) => (
-        <Link href={i.href} style="link">
-          {i.title}
+      navIcons.map((i) => (
+        <Link href={i.href} aria-label={i.label} style="link">
+          <Icon name={i.icon} width={25} height={30} />
         </Link>
       ))
     }
@@ -92,23 +101,59 @@ import Link from "./Link.astro";
 </nav>
 
 <script>
-const banner = document.querySelector("#banner") as HTMLParagraphElement;
-const navLinks = document.querySelector("#nav-links") as HTMLDivElement;
-const logomark = document.querySelector("#logomark") as HTMLImageElement;
+  const banner = document.querySelector("#banner") as HTMLParagraphElement;
+  const navLinks = document.querySelector("#nav-links") as HTMLDivElement;
+  const logomark = document.querySelector("#logomark") as HTMLImageElement;
 
-const bannerObs = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    const isIntersecting = entry.isIntersecting;
-    if (isIntersecting) {
-      navLinks.classList.remove("opacity-0", "hidden");
-      logomark.classList.remove("scale-50");
-    }
-    if (!isIntersecting) {
-      navLinks.classList.add("opacity-0", "hidden");
-      logomark.classList.add("scale-50");
-    }
-  });
-}, {});
+  const bannerObs = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const isIntersecting = entry.isIntersecting;
+      if (isIntersecting) {
+        navLinks.classList.remove("opacity-0", "hidden");
+        logomark.classList.remove("scale-50");
+      }
+      if (!isIntersecting) {
+        navLinks.classList.add("opacity-0", "hidden");
+        logomark.classList.add("scale-50");
+      }
+    });
+  }, {});
 
-bannerObs.observe(banner);
+  bannerObs.observe(banner);
 </script>
+<!-- <nav class="grid gap-2 pt-1 px-6 sticky top-0 bg-white">
+ <div class="flex justify-between items-start gap-2">
+   <Icon name="ic:baseline-menu" width={40} height={50}/>
+   <Image
+     src={logo}
+     alt="logomark for Pine"
+     format="avif"
+     width={250}
+     class="relative left-8 transition-transform duration-700 self-start"
+     id="logomark"
+   />
+   <div class="flex justify-end items-center gap-1 py-2">
+     {
+       // Render navIcons only for smaller viewports
+       navIcons.map((i) => (
+         <Link style="ghost" href={i.href} aria-label={i.label}>
+           <Icon name={i.icon} width={30} height={40} />
+         </Link>
+       ))
+     }
+   </div>
+ </div>
+ <div
+   class="hidden sm:flex justify-center text-center items-center text-sm md:text-lg gap-3 mb-1 md:gap-5 transition-opacity w-full"
+   id="nav-links"
+ >
+   {
+    
+     navItems.map((i) => (
+       <Link href={i.href} style="link">
+         {i.title}
+       </Link>
+     ))
+   }
+ </div>
+</nav> -->

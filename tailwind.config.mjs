@@ -13,7 +13,8 @@ module.exports = {
 		},
 		colors: {
 		  "pine-text": "#050807",
-		  "pine-accent": "#7DD9B7",
+		  "pine-accent": "#f97316",
+		  "coffee-text": "#1c120c",
 		},
 	  },
 	},
